@@ -33,10 +33,18 @@ df= pd.concat([df.drop('sub_grade',axis=1),subgrade_dummies],axis=1)
 df.head()
 **Durch Ausführen der drei obigen funktionen, werden die Object in "sub_grade" in dummies umgewandelt, die nur die Werte 0 oder 1 annehmen können. Daraufhin werden das bestehende Data Frame und das neue "subgrade_dummies" zusammengefügt und die alte Spalte "sub_grade" entfernt. Im head sollten die Spalten nun von A2 bis G5 zu sehen sein.
 
+**Die Daten werden nun in Trainings- und Test gesplittet. Dazu sollte zunächst definiert werden was das X-Array (Daten mit den Features) und was das y-Array (Daten mit der Zielvariable) ist:** 
+X=df.drop("loan_repaid",axis=1).values
+y=df["loan_repaid"]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=101)
 
+scaler = MinMaxScaler()
+scaler.fit(X_train)
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+**Durch Ausführen der obigen Funktionen werden die Daten normalisiert und transformiert
 
-**Basierend darauf kann ein Klassifizierungsreport und eine Confusion Matrix für das Modell erstellt werden:**
-print (confusion_matrix(df["Cluster"],kmeans.labels_))
-print ("\n")
-print (classification_report(df["Cluster"],kmeans.labels_))
-**Je näher die Werte bei precicion, recall und f1-score an 1 sind, desto genauer sind Auswertung. **
+**Die Leistung des Modells kann durch ein Plot dargestellt werden, in dem der loss der Validierung und der loss des Trainings verglichen werden:**
+losses = pd.DataFrame(model.history.history)
+losses[['loss','val_loss']].plot()
+**Im Diagramm sollte zu sehen sein, dass die orangene Linie (entspricht den echten Daten) fast einer geraden Linie entspricht. Die blaue Linie (tatsächlicher loss des Modells) hingegen geht im ersten Bereich stark runter.
