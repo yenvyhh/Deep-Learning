@@ -1,5 +1,4 @@
 # Projekt 6 - Deep Learning
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/yenvyhh/K-Means-Clustering/main?filepath=K%20Means%20Clustering%20-%20Projekt%203.ipynb)
 
 **Die Daten importieren und als Data Frame abspeichern:**
 df = pd.read_csv('../DATA/lending_club_loan_two.csv')
