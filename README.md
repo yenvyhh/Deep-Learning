@@ -1,5 +1,7 @@
 # Projekt 6 - Deep Learning
 
+**Zu Beginn bitte unter "Cell" -> "Run All" auswählen.**
+
 **Die Daten importieren und als Data Frame abspeichern:**
 df = pd.read_csv('../DATA/lending_club_loan_two.csv')
        
